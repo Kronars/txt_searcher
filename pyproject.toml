@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "txt-searcher"
+version = "0.1.0"
+description = "Test Job for Python Backend Junior"
+authors = ["Arsenii <ars_shutin@mail.ru>"]
+readme = "README.md"
+packages = [{include = "txt_searcher"}]
+
+[tool.poetry.dependencies]
+python = "3.11"
+fastapi = "^0.92.0"
+sqlalchemy = "^2.0.4"
+psycopg2 = "^2.9.5"
+uvicorn = "^0.20.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+pandas = "^1.5.3"
+httpx = "^0.23.3"
+sqlalchemy-utils = "^0.40.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
