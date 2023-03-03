@@ -33,15 +33,11 @@ engine = create_engine(conn_url)
 metadata = MetaData()
 
 with Session(engine) as db:
-    if metadata.tables.__len__() == 0:
-        df.to_sql('comment', engine,
-                dtype={
-            'text': Text,
-            'created_date': DateTime,
-            'rubrics': ARRAY(String(20))}
-            )
+    df.to_sql('comment', engine, if_exists='replace',
+            dtype={
+        'text': Text,
+        'created_date': DateTime,
+        'rubrics': ARRAY(String(20))}
+        )
 
-        print('Данные из posts.csv выгружены в БД')
-
-    else:
-        print('В таблице comments бд txt_search уже находятся данные, загрузка отменена')
+    print('Данные из posts.csv выгружены в БД')
