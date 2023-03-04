@@ -1,8 +1,6 @@
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import sessionmaker
 
-from contextlib import contextmanager
-
 # Таблица "public.comment"
 #    Столбец    |             Тип             |
 # --------------+-----------------------------+

@@ -1,8 +1,10 @@
-from pydantic import BaseModel
 from datetime import datetime
 
+from pydantic import BaseModel, constr
+
+
 class TextSearch(BaseModel):
-    text: str
+    text: constr(min_length=3)
 
 class FoundedRow(BaseModel):
     index: int

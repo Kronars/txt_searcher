@@ -48,7 +48,7 @@ def delete_in_es(id: int) -> True:
     Если запись не найдена - возвращает Fasle'''
     try:
         es.delete(index='comment', id=id)
-    except NotFoundError as e:
+    except NotFoundError:
         return False
     
     return True

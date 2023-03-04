@@ -17,7 +17,7 @@ def search(text: TextSearch) -> TextFound:
     '''Поиск по переданному тексту и получение 20 записей отсортированных по дате создания.
     Если ничего не найдено возвращает - {'result': 'nothing found'}'''
     db_id = crud.search_in_es(text.text)
-    
+
     if db_id.__len__() == 0:
         return {'result': 'nothing found'}
     
@@ -26,7 +26,7 @@ def search(text: TextSearch) -> TextFound:
     return TextFound(founded=full_fields)
 
 
-@app.delete('/delete/{id}') # TODO: Удаляет с задержкой, пошаманить с созданием сессий
+@app.delete('/delete/{id}') # TODO: При двух быстрых запросах вернёт успех, выяснить
 def delete(id: int):
     '''Полное удаление - из бд и из ElasticSearch.
     При успехе возвращает - 
