@@ -2,15 +2,16 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 
 from app import crud
-from app.crud import es
 from app.schemes import TextSearch, TextFound
+
 
 app = FastAPI()
 
 
 @app.on_event('shutdown')
 def shutdown():
-    es.close()
+    crud.es.close()
+
 
 @app.get('/search')
 def search(text: TextSearch) -> TextFound:

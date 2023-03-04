@@ -2,9 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from elasticsearch import Elasticsearch, NotFoundError
 
-from app.db import Session, Comment
-
-es = Elasticsearch('http://localhost:9200')
+from app.db import Session, Comment, es
 
 
 def search_in_es(text: str) -> list[int]:
