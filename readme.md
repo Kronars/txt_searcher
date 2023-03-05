@@ -1,5 +1,19 @@
+Для выполнения выбрал следующий стек технологий:
+- PostgreSQL
+- Python 3.11.0
+  - FastApi
+  - sqlalchemy + psycopg2
+  - pytest
+  - poetry - для менеджмента зависимостей, в Dockerfile использую pip
+- ElasticSearch 7.17.9
 
+Сборка и запуск:
+> `docker compose up`
 
+<!-- Узнать ip для подключения
+> docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' txt_searcher-app-1 -->
+
+При запуске, python приложение выгружает из `posts.csv` все данные в `postgresql` и `elasticsearh` - это занимает какое то время, прогресс можно увидеть в логах контейнера
 
 # Тестовое задание для стажера Python
 

@@ -1,3 +1,4 @@
+import time
 from sqlalchemy import select
 
 
@@ -20,7 +21,7 @@ def process_es(db_data, es):
         }
         es.index(index='comment', id=row[0], document=doc)
 
-        if row[0] % 100 == 0: print(f'[Info] Выгружено {row[0] + 100} записей')
+        if row[0] % 100 == 0: print(f'[Info] {time.ctime()} Выгружено {row[0] + 100} записей')
 
     print('Создан индекс comment, записи из БД успешно выгружены в ES')
 

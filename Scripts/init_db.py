@@ -41,14 +41,14 @@ def insert_all(cur, rows):
 
 def load_to_db(rows):
     if database_exists(DB_URL):
-        print('База данных txt_search будет перезаписана')
-        drop_database(DB_URL)
-        create_database(DB_URL)
+        print('База данных txt_search уже существует')
+        return None
+        # drop_database(DB_URL)
+        # create_database(DB_URL)
     else:
         create_database(DB_URL)
         print("База данных txt_search была создана")
 
-    DB_URL
     conn = psycopg2.connect(user='postgres', dbname='txt_search', 
                         host=host, password='postgres')
     conn.autocommit = True

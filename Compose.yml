@@ -3,7 +3,7 @@ services:
   app:
     build: .
     ports:
-      - "80:80"
+      - 80:80
     environment:
       - DB_URL=postgresql://postgres:postgres@db/txt_search
       - ES_URL=http://es:9200
@@ -19,7 +19,7 @@ services:
     image: postgres:alpine
     restart: always
     ports:
-      - "5432:5432"
+      - 5432:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -31,8 +31,8 @@ services:
   es:
     image: elasticsearch:7.17.9
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - 9200:9200
+      - 9300:9300
     healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:9200"]
         interval: 15s
