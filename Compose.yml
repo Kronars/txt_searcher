@@ -1,0 +1,46 @@
+services:
+
+  app:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - DB_URL=postgresql://postgres:postgres@db/txt_search
+      - ES_URL=http://es:9200
+    depends_on:
+      db:
+        condition: service_started
+      es:
+        condition: service_healthy
+    volumes:
+      - ./:/usr/src/code
+
+  db:
+    image: postgres:alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: searcher
+      PGDATA: /usr/src/data
+    volumes:
+      - db-data:/usr/src/data/
+
+  es:
+    image: elasticsearch:7.17.9
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:9200"]
+        interval: 15s
+        timeout: 10s
+        retries: 5
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+
+volumes:
+  db-data:

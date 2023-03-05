@@ -1,3 +1,5 @@
+import os
+
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import sessionmaker
 from elasticsearch import Elasticsearch
@@ -13,13 +15,17 @@ from Scripts.init_es import fill_es
 #  created_date | timestamp without time zone |
 #  rubrics      | character varying(20)[]     |
 
-es = Elasticsearch('http://localhost:9200')
 
-engine = create_engine('postgresql+psycopg2://postgres:postgres@localhost/txt_search')
+DB_URL = os.getenv('DB_URL')
+ES_URL = os.getenv('ES_URL')
+
+es = Elasticsearch(ES_URL)
+engine = create_engine(DB_URL)  # postgresql+psycopg2://postgres:postgres@localhost/txt_search
+
 metadata = MetaData()
 Session = sessionmaker(bind=engine)
 
-fill_db(engine) # Загрузить из csv в бд
+fill_db() # Загрузить из csv в бд
 
 Comment = Table('comment', metadata, autoload_with=engine)
 
